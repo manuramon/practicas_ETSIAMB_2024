@@ -1,0 +1,38 @@
+# Parameter file for test-day
+# Practicas MGA 2023
+DATAFILE
+datos2blup.txt
+SKIP_HEADER
+1
+TRAITS
+1
+FIELDS_PASSED_TO_OUTPUT
+5
+WEIGHT(S)
+
+RESIDUAL VARIANCE
+100.00
+EFFECT
+2 cross alpha # HY
+EFFECT
+3 cross alpha # parity-age
+EFFECT
+4 cross alpha # control de ordeño
+EFFECT
+5 cross alpha # A
+RANDOM
+animal
+OPTIONAL
+pe
+FILE
+ped2blup.txt
+FILE_POS
+1 2 3 0 0
+PED_DEPTH
+100
+(CO)VARIANCES
+30.00 # aditiva
+(CO)VARIANCES_PE
+50.00 #pe
+OPTION method VCE 
+OPTION sol se
