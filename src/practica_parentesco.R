@@ -19,7 +19,7 @@ library(visPedigree)
 if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 BiocManager::install("GeneticsPed")
-#library(GeneticsPed)
+library(GeneticsPed)
 
 # inbreedR
 # (https://cran.r-project.org/web/packages/inbreedR/vignettes/inbreedR_step_by_step.html)
@@ -55,7 +55,9 @@ print(p1a)
 
 # dibujamos el pedigrí
 
-visped(tidyped(p1), cex=1)
+visped(tidyped(p1), 
+       cex=2,
+       compact = TRUE)
 
 
 # Calculamos la matriz de parentesco
@@ -95,8 +97,6 @@ round(inb_a, 3)
 
 # usando la función inbreeding del paquete GeneticsPed
 # hay que ponerlo en el formato que requiere la función
-
-library(GeneticsPed)
 
 p1b <- Pedigree(p1a, subject = "id", ascendant = c("padre","madre"))
 inbreeding(p1b)
@@ -146,7 +146,7 @@ matC1[11:15, 11:15]
 
 
 # O podemos usar la función kinship del paquete GeneticsPed
-matC2 <- kinship(p2)
+matC2 <- GeneticsPed::kinship(p2)
 matC2[1:4, 1:4]
 matC2[11:15, 11:15]
 
@@ -218,7 +218,7 @@ p2 <- data.frame(id=c("A","B","C","D","E"),
                  madre=c(NA,"A","A","C","C"))
 
 p2a = prepPed(p2)
-c1 <- kinship(id= p2a$id, dadid=p2a$padre, momid=p2a$madre)
+c1 <- kinship2::kinship(id= p2a$id, dadid=p2a$padre, momid=p2a$madre)
 inbc1 <- diag(c1)*2 - 1
 
 
@@ -226,7 +226,7 @@ p3 <- data.frame(id=c("A","B","C","D","E", "X"),
                  padre=c(NA,NA,NA,"B","B", "D"),
                  madre=c(NA,"A","A","C","C", "E"))
 p3a <- prepPed(p3)
-c3 <- kinship(id=p3a$id, dadid=p3a$padre, momid=p3a$madre)
+c3 <- kinship2::kinship(id=p3a$id, dadid=p3a$padre, momid=p3a$madre)
 
 
 p4 <- data.frame(id =   c("B","C","D","E","F","G","X"),
